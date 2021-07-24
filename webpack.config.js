@@ -7,7 +7,9 @@ const package = require('./package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ModuleFederationPlugin = webpack.container.ModuleFederationPlugin;
+const EnvironmentPlugin = webpack.EnvironmentPlugin;
 
 require('dotenv').config();
 
@@ -86,7 +88,7 @@ module.exports = (env, argv) => {
         {
           test: /\.(scss|css|sass)$/,
           use: [
-            'style-loader',
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
             'css-loader',
             'postcss-loader',
             'resolve-url-loader', // @IMPORTANT: order is required (https://github.com/bholloway/resolve-url-loader/blob/v5/packages/resolve-url-loader/README.md#configure-webpack)
@@ -152,12 +154,16 @@ module.exports = (env, argv) => {
           STATIC_PATH,
         },
       }),
-      new webpack.EnvironmentPlugin({
+      new EnvironmentPlugin({
         NODE_ENV: env.NODE_ENV || 'development',
         BUILT_AT: env.BUILT_AT || '',
         GIT_COMMIT: env.GIT_COMMIT || '',
         GIT_BRANCH: env.GIT_BRANCH || '',
         DEVELOPMENT_IN_PRODUCTION: env.DEVELOPMENT_IN_PRODUCTION || '',
+      }),
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
       }),
       new ModuleFederationPlugin({
         name: APP_REMOTE_NAME,
