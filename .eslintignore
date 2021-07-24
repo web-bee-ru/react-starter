@@ -1,0 +1,5 @@
+# Build artifacts
+/node_modules
+/dist
+/src/types/**/*.json
+/src/types/**/*.yaml

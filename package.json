@@ -5,19 +5,34 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx .",
+    "fix:eslint": "eslint --ext .ts,.tsx,.js,.jsx . --fix",
     "lint:stylelint": "stylelint **/*.{css,scss,tsx,jsx}",
     "fix:stylelint": "stylelint --fix  **/*.{css,scss,tsx,jsx}"
   },
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
     "@web-bee-ru/commitlint-config": "^1.0.1",
+    "@web-bee-ru/eslint-plugin": "^0.6.0",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-node": "^0.3.4",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-unicorn": "^34.0.1",
     "husky": "^4.3.8",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",
-    "stylelint-scss": "^3.20.1"
+    "stylelint-scss": "^3.20.1",
+    "typescript": "^4.3.5"
   },
   "repository": {
     "type": "git",
