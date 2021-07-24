@@ -3,3 +3,4 @@
 /dist
 /src/types/**/*.json
 /src/types/**/*.yaml
+/public
