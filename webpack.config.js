@@ -6,18 +6,22 @@ const package = require('./package.json');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const ModuleFederationPlugin = webpack.container.ModuleFederationPlugin;
 
 require('dotenv').config();
 
 module.exports = (env, argv) => {
+  const mode = argv.mode || env.NODE_ENV || 'none';
+  const isProduction = mode === 'production';
+
   const PUBLIC_PATH = env.PUBLIC_PATH || '/';
   const STATIC_PATH = PUBLIC_PATH;
   const APP_REMOTE_NAME = env.APP_REMOTE_NAME || 'reactStarter';
 
   return {
-    mode: argv.mode || env.NODE_ENV || 'none',
-    target: ['web', 'es5'],
+    mode,
+    target: ['web', isProduction ? 'es5' : 'browserslist'].filter(Boolean),
     entry: {
       app: path.join(__dirname, 'src', 'index.tsx'),
     },
@@ -34,7 +38,21 @@ module.exports = (env, argv) => {
       },
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
+    devtool: isProduction ? false : 'inline-source-map',
     optimization: {
+      minimize: isProduction,
+      // @NOTE: выключаю удаление debugger'ов, see - https://github.com/webpack/webpack/blob/main/lib/config/defaults.js#L995
+      minimizer: [
+        new TerserWebpackPlugin({
+          terserOptions: {
+            compress: {
+              passes: 2,
+              drop_console: false,
+              drop_debugger: false,
+            },
+          },
+        }),
+      ],
       splitChunks: {
         chunks: 'async',
         minSize: 20000,
@@ -90,13 +108,8 @@ module.exports = (env, argv) => {
           test: /\.(woff|woff2)$/i,
           type: 'asset/resource',
         },
-        // Support @d11t/ui/lib/styles .cur imports
-        {
-          test: /\.(cur)$/i,
-          type: 'asset/resource',
-        },
         // ES6 dependencies transpile -> ES5 (ie11 support)
-        {
+        isProduction && {
           test: /\.js$/,
           include: (name) => {
             const moduleNames = [
@@ -121,7 +134,7 @@ module.exports = (env, argv) => {
             },
           },
         },
-      ],
+      ].filter(Boolean),
     },
     plugins: [
       /**
