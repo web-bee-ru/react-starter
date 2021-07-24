@@ -17,5 +17,6 @@ module.exports = makeConfig({
     'style', // @NOTE: style fixes
     'deps', // @NOTE: dependencies update
     'test', // @NOTE: tests
+    'infra', // @NOTE: infrastructure
   ],
 });
