@@ -3,7 +3,7 @@ const serveHandler = require('serve-handler');
 const http = require('http'); // comes pre-installed with Node.js
 
 const HOST = process.env.HOST || 'localhost';
-const PORT = Number(process.env.PORT || 3000);
+const PORT = Number(process.env.PORT || 9000);
 
 http
   .createServer((req, res) => {
