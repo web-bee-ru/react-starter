@@ -4,7 +4,11 @@
   "description": "React (TS) starter project",
   "main": "index.js",
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@web-bee-ru/commitlint-config": "^1.0.1",
+    "husky": "^4.3.8"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/web-bee-ru/react-starter/issues"
   },
-  "homepage": "https://github.com/web-bee-ru/react-starter#readme"
+  "homepage": "https://github.com/web-bee-ru/react-starter#readme",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
