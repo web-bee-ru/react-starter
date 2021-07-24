@@ -9,6 +9,7 @@ http
   .createServer((req, res) => {
     return serveHandler(req, res, {
       public: './dist',
+      rewrites: [{ source: '/**', destination: '/index.html' }],
     });
   })
   .listen(PORT, HOST);
