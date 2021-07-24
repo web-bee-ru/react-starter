@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
 
   return {
     mode,
-    target: ['web', isProduction ? 'es5' : 'browserslist'].filter(Boolean),
+    target: isProduction ? ['web', 'es5'] : 'web',
     entry: {
       app: path.join(__dirname, 'src', 'index.tsx'),
     },
@@ -55,6 +55,8 @@ module.exports = (env, argv) => {
           },
         }),
       ],
+      // @NOTE: fix HMR, see - https://stackoverflow.com/a/66197410
+      runtimeChunk: isProduction ? undefined : 'single',
       splitChunks: {
         chunks: 'async',
         minSize: 20000,
@@ -202,6 +204,8 @@ module.exports = (env, argv) => {
       port: env.PORT || 9000,
       historyApiFallback: true,
       allowedHosts: ['.ngrok.io'], // allow host ngrok
+      inline: true,
+      hot: true,
     },
   };
 };
