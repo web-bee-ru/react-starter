@@ -1,0 +1,21 @@
+{
+  "name": "react-starter",
+  "version": "1.0.0",
+  "description": "React (TS) starter project",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-bee-ru/react-starter.git"
+  },
+  "author": "criitch@yandex.ru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/web-bee-ru/react-starter/issues"
+  },
+  "homepage": "https://github.com/web-bee-ru/react-starter#readme"
+}
