@@ -9,6 +9,7 @@ const App = () => {
 
 const Div = styled.div`
   color: green;
+  font-family: Roboto, sans-serif;
 `;
 
 export default App;

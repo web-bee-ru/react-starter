@@ -104,11 +104,17 @@ module.exports = (env, argv) => {
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/resource',
+          generator: {
+            filename: '[name][hash][ext][query]',
+          },
         },
         // Fonts
         {
           test: /\.(woff|woff2)$/i,
           type: 'asset/resource',
+          generator: {
+            filename: '[name][hash][ext][query]',
+          },
         },
         // ES6 dependencies transpile -> ES5 (ie11 support)
         isProduction && {
