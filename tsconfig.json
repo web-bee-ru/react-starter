@@ -20,8 +20,8 @@
     "noUnusedParameters": true,
     "baseUrl": "src",
     "paths": {
-      "~/*": ["./src/*"],
-      "@/*": ["./src/*"]
+      "~/*": ["./*"],
+      "@/*": ["./*"]
     }
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx", "./@types/**/*.d.ts"],
