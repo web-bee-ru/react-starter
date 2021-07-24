@@ -166,6 +166,7 @@ module.exports = (env, argv) => {
         GIT_COMMIT: env.GIT_COMMIT || '',
         GIT_BRANCH: env.GIT_BRANCH || '',
         DEVELOPMENT_IN_PRODUCTION: env.DEVELOPMENT_IN_PRODUCTION || '',
+        APP_BASE_URL: env.APP_BASE_URL || '/',
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',
@@ -178,7 +179,7 @@ module.exports = (env, argv) => {
           // add your remotes
         },
         exposes: {
-          './App': './src/components/App',
+          './App': './src/components/app/App',
         },
         shared: {
           // eslint-disable-next-line quote-props
