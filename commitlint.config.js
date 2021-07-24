@@ -18,5 +18,6 @@ module.exports = makeConfig({
     'deps', // @NOTE: dependencies update
     'test', // @NOTE: tests
     'infra', // @NOTE: infrastructure
+    'types', // @NOTE: types
   ],
 });
