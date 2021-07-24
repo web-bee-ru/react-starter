@@ -3,14 +3,21 @@
   "version": "1.0.0",
   "description": "React (TS) starter project",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:stylelint": "stylelint **/*.{css,scss,tsx,jsx}",
+    "fix:stylelint": "stylelint --fix  **/*.{css,scss,tsx,jsx}"
+  },
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@web-bee-ru/commitlint-config": "^1.0.1",
-    "husky": "^4.3.8"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "husky": "^4.3.8",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "stylelint-scss": "^3.20.1"
   },
   "repository": {
     "type": "git",
