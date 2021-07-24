@@ -1,12 +1,7 @@
 module.exports = {
-  processors: [
-    'stylelint-processor-styled-components'
-  ],
+  processors: ['stylelint-processor-styled-components'],
   plugins: ['stylelint-scss'],
-  extends: [
-    'stylelint-config-standard',
-    'stylelint-config-styled-components'
-  ],
+  extends: ['stylelint-config-standard', 'stylelint-config-styled-components'],
   rules: {
     // @NOTE: This conflicts with @use from scss
     'at-rule-no-unknown': null,
