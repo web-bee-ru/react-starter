@@ -121,6 +121,9 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
+      /**
+       * Copy static files
+       */
       new CopyWebpackPlugin({
         patterns: [{ from: 'public/static', to: './' }],
       }),
@@ -143,7 +146,8 @@ module.exports = (env, argv) => {
     ],
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
-      port: 9000,
+      host: env.HOST || 'localhost',
+      port: env.PORT || 9000,
       historyApiFallback: true,
       allowedHosts: ['.ngrok.io'], // allow host ngrok
     },
