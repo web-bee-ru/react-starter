@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const urljoin = require('url-join');
+const webpack = require('webpack');
+const package = require('./package.json');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const urljoin = require('url-join');
-
-const webpack = require('webpack');
+const ModuleFederationPlugin = webpack.container.ModuleFederationPlugin;
 
 require('dotenv').config();
 
 module.exports = (env, argv) => {
   const PUBLIC_PATH = env.PUBLIC_PATH || '/';
   const STATIC_PATH = PUBLIC_PATH;
+  const APP_REMOTE_NAME = env.APP_REMOTE_NAME || 'reactStarter';
 
   return {
     mode: argv.mode || env.NODE_ENV || 'none',
@@ -142,6 +145,29 @@ module.exports = (env, argv) => {
         GIT_COMMIT: env.GIT_COMMIT || '',
         GIT_BRANCH: env.GIT_BRANCH || '',
         DEVELOPMENT_IN_PRODUCTION: env.DEVELOPMENT_IN_PRODUCTION || '',
+      }),
+      new ModuleFederationPlugin({
+        name: APP_REMOTE_NAME,
+        filename: 'remoteEntry.js',
+        remotes: {
+          // add your remotes
+        },
+        exposes: {
+          './App': './src/components/App',
+        },
+        shared: {
+          // eslint-disable-next-line quote-props
+          react: {
+            eager: true,
+            singleton: true,
+            requiredVersion: package.dependencies.react,
+          },
+          'react-dom': {
+            eager: true,
+            singleton: true,
+            requiredVersion: package.dependencies['react-dom'],
+          },
+        },
       }),
     ],
     devServer: {
