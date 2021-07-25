@@ -169,6 +169,7 @@ module.exports = (env, argv) => {
         GIT_BRANCH: env.GIT_BRANCH || '',
         DEVELOPMENT_IN_PRODUCTION: env.DEVELOPMENT_IN_PRODUCTION || '',
         APP_BASE_URL: env.APP_BASE_URL || '/',
+        PETS_API_BASE_URL: env.PETS_API_BASE_URL || 'https://petstore3.swagger.io/api/v3',
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',

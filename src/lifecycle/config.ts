@@ -8,6 +8,7 @@ declare global {
       GIT_BRANCH?: string;
       DEVELOPMENT_IN_PRODUCTION?: 'true' | 'false';
       APP_BASE_URL?: string;
+      PETS_API_BASE_URL?: string;
     }
   }
 }
@@ -23,10 +24,12 @@ export const env = {
 // @DOC: App config
 export interface Config {
   APP_BASE_URL?: string;
+  PETS_API_BASE_URL?: string;
 }
 
 export const config: Config = {
   APP_BASE_URL: process.env.APP_BASE_URL || '/',
+  PETS_API_BASE_URL: process.env.PETS_API_BASE_URL || '/',
 };
 
 // @DOC: Use to parse env variables with options

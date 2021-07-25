@@ -14,6 +14,9 @@ const DefaultLayout: React.FC = ({ children }) => {
         <div>
           <MainLink to={Routes.TEST}>TEST</MainLink>
         </div>
+        <div>
+          <MainLink to={Routes.PETS}>PETS</MainLink>
+        </div>
       </div>
       {children}
     </FullHeight>

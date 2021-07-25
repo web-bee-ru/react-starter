@@ -16,10 +16,14 @@
     "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "fix:eslint": "eslint --ext .ts,.tsx,.js,.jsx . --fix",
     "lint:stylelint": "stylelint **/*.{css,scss} & stylelint **/*.{tsx,jsx} --config .stylelintrc.styled-components.js",
-    "fix:stylelint": "stylelint --fix  **/*.{css,scss}"
+    "fix:stylelint": "stylelint --fix  **/*.{css,scss}",
+    "generate:api": "run-p generate:pets-api",
+    "generate:pets-api": "taxios-generate --skip-additional-properties --named-enums src/types/pets-api/api.json -o ./src/types/generated/PetsAPI.ts --skip-validation -e PetsAPI && prettier --write ./src/types/generated/PetsAPI.ts"
   },
   "dependencies": {
     "@moxy/next-layout": "^2.2.3",
+    "@simplesmiler/taxios": "^0.2.7",
+    "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "react": "^16.14.0",
     "react-dom": "^17.0.2",
@@ -30,6 +34,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
+    "@simplesmiler/taxios-generate": "^0.2.7",
     "@swc/core": "^1.2.66",
     "@trivago/prettier-plugin-sort-imports": "^2.0.2",
     "@types/node": "^16.4.2",

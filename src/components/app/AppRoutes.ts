@@ -20,6 +20,11 @@ const AppRoutes: AppRoute[] = [
     page: AppPages.TestPage,
     exact: true,
   },
+  {
+    path: Routes.PETS,
+    page: AppPages.PetsPage,
+    exact: true,
+  },
 ];
 
 export { AppRoutes };
