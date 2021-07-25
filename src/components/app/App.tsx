@@ -3,6 +3,7 @@ import React from 'react';
 import '~/assets/main.scss';
 import { ApiProvider } from '~/components/api';
 import { AppRouter } from '~/components/app';
+import { ServicesProvider } from '~/components/services';
 import { config } from '~/lifecycle/config';
 
 export interface AppProps {
@@ -12,7 +13,9 @@ export interface AppProps {
 const App = ({ basePath }: AppProps) => {
   return (
     <ApiProvider petsApiBaseUrl={config.PETS_API_BASE_URL}>
-      <AppRouter basePath={basePath} />;
+      <ServicesProvider>
+        <AppRouter basePath={basePath} />;
+      </ServicesProvider>
     </ApiProvider>
   );
 };
