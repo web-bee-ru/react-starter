@@ -49,6 +49,7 @@
     "@typescript-eslint/parser": "^4.28.4",
     "@web-bee-ru/commitlint-config": "^1.0.1",
     "@web-bee-ru/eslint-plugin": "^0.6.0",
+    "branch-name-lint": "^2.1.1",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
     "dotenv": "^10.0.0",
@@ -104,7 +105,8 @@
   "homepage": "https://github.com/web-bee-ru/react-starter#readme",
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "node branchNameLint"
     }
   },
   "browserslist": [
