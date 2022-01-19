@@ -184,7 +184,7 @@ module.exports = (env, argv) => {
         PETS_API_BASE_URL: env.PETS_API_BASE_URL || 'https://petstore3.swagger.io/api/v3',
       }),
       new MiniCssExtractPlugin({
-        filename: '[name].css',
+        filename: 'css/[name].css',
         chunkFilename: 'css/[id].css',
       }),
       // Experimental hot reloading for React
