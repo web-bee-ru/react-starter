@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const branchNameLint = require('branch-name-lint');
+const branchNameLint = require('@web-bee-ru/branch-name-lint');
 
 // See: https://github.com/barzik/branch-name-lint#options
 const options = {

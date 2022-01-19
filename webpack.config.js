@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
 const urljoin = require('url-join');
 const webpack = require('webpack');
 const paths = require('./config/paths');
-const appPackageJson = require(paths.appPackageJson);
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const safePostCssParser = require('postcss-safe-parser');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ModuleFederationPlugin = webpack.container.ModuleFederationPlugin;
 const EnvironmentPlugin = webpack.EnvironmentPlugin;
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
@@ -28,7 +24,6 @@ module.exports = (env, argv) => {
 
   const PUBLIC_PATH = env.PUBLIC_PATH || '/';
   const STATIC_PATH = PUBLIC_PATH;
-  const APP_REMOTE_NAME = env.APP_REMOTE_NAME || 'reactStarter';
 
   return {
     mode,
@@ -37,7 +32,7 @@ module.exports = (env, argv) => {
       app: paths.appIndex,
     },
     output: {
-      filename: '[name].js',
+      filename: 'js/[name].js',
       path: paths.appBuild,
       publicPath: 'auto',
       clean: true,
@@ -64,24 +59,7 @@ module.exports = (env, argv) => {
             },
           },
         }),
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorOptions: {
-            parser: safePostCssParser,
-            map: isProduction
-              ? false
-              : {
-                  // `inline: false` forces the sourcemap to be output into a
-                  // separate file
-                  inline: false,
-                  // `annotation: true` appends the sourceMappingURL to the end of
-                  // the css file, helping the browser find the sourcemap
-                  annotation: true,
-                },
-          },
-          cssProcessorPluginOptions: {
-            preset: ['default', { minifyFontValues: { removeQuotes: false } }],
-          },
-        }),
+        new CssMinimizerPlugin(),
       ],
       // @NOTE: fix HMR, see - https://stackoverflow.com/a/66197410
       runtimeChunk: isProduction ? undefined : 'single',
@@ -130,15 +108,15 @@ module.exports = (env, argv) => {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/resource',
           generator: {
-            filename: '[name][hash][ext][query]',
+            filename: 'images/[name][hash][ext][query]',
           },
         },
         // Fonts
         {
-          test: /\.(woff|woff2)$/i,
+          test: /\.(woff|woff2|eot|ttf|otf)$/i,
           type: 'asset/resource',
           generator: {
-            filename: '[name][hash][ext][query]',
+            filename: 'fonts/[name][hash][ext][query]',
           },
         },
         // ES6 dependencies transpile -> ES5 (ie11 support)
@@ -207,30 +185,7 @@ module.exports = (env, argv) => {
       }),
       new MiniCssExtractPlugin({
         filename: '[name].css',
-        chunkFilename: '[id].css',
-      }),
-      new ModuleFederationPlugin({
-        name: APP_REMOTE_NAME,
-        filename: 'remoteEntry.js',
-        remotes: {
-          // add your remotes
-        },
-        exposes: {
-          './App': './src/components/app/App',
-        },
-        shared: {
-          // eslint-disable-next-line quote-props
-          react: {
-            eager: true,
-            singleton: true,
-            requiredVersion: appPackageJson.dependencies.react,
-          },
-          'react-dom': {
-            eager: true,
-            singleton: true,
-            requiredVersion: appPackageJson.dependencies['react-dom'],
-          },
-        },
+        chunkFilename: 'css/[id].css',
       }),
       // Experimental hot reloading for React
       // https://github.com/facebook/react/tree/master/packages/react-refresh
