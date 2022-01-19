@@ -1,5 +1,5 @@
 # Choose builder base image
-FROM node:14-alpine as builder
+FROM node:16-alpine as builder
 
 # Create app directory
 WORKDIR /srv/app
@@ -8,7 +8,7 @@ WORKDIR /srv/app
 # Default Node image is spkp-docker.nexus-ci.corp.dev.vtb/ubi8/nodejs-14
 
 # Install build essentials
-RUN apk add --no-cache make gcc g++ python curl git
+RUN apk add --no-cache make gcc g++ python3 curl git
 
 # Install app dependencies
 
@@ -35,7 +35,7 @@ RUN npm run build \
 
 
 # Choose runtime base image
-FROM node:14-alpine
+FROM node:16-alpine
 
 # Create app directory
 WORKDIR /srv/app
