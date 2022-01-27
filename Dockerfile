@@ -14,6 +14,8 @@ RUN apk add --no-cache make gcc g++ python3 curl git
 
 COPY package.json package-lock.json ./
 
+RUN npm ci
+
 # ========================================================================
 # Everyhing above here should change rarely to benefit from docker caching
 # ========================================================================
