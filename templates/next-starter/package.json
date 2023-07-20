@@ -1,0 +1,59 @@
+{
+  "name": "next-starter",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "check-build": "tsc --noEmit --incremental false",
+    "build": "next build",
+    "start": "next start",
+    "lint": "run-s -csn lint:eslint lint:prettier lint:stylelint",
+    "fix": "run-s -csn fix:eslint fix:prettier fix:stylelint",
+    "lint:prettier": "prettier --check .",
+    "fix:prettier": "prettier --write .",
+    "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx .",
+    "fix:eslint": "eslint --ext .ts,.tsx,.js,.jsx . --fix",
+    "lint:stylelint": "stylelint **/*.{css,scss} & stylelint **/*.{tsx,jsx} --config .stylelintrc.styled-components.js",
+    "fix:stylelint": "stylelint --fix  **/*.{css,scss}",
+    "generate:api": "run-p generate:pets-api",
+    "generate:pets-api": "taxios-generate --skip-additional-properties --named-enums src/types/pets-api/api.json -o ./src/types/generated/PetsAPI.ts --skip-validation -e PetsAPI && prettier --write ./src/types/generated/PetsAPI.ts",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@simplesmiler/taxios": "0.2.12",
+    "axios": "0.27.2",
+    "next": "^13.4.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swr": "2.2.0"
+  },
+  "devDependencies": {
+    "@simplesmiler/taxios-generate": "0.2.12",
+    "@trivago/prettier-plugin-sort-imports": "^2.0.2",
+    "@svgr/webpack": "6.2.1",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@web-bee-ru/eslint-plugin": "0.6.2",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-next": "12.2.2",
+    "eslint-import-resolver-alias": "1.1.2",
+    "eslint-import-resolver-node": "0.3.6",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.6.0",
+    "eslint-plugin-react": "7.30.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-unicorn": "43.0.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
+    "stylelint-scss": "^3.20.1",
+    "husky": "^8.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "node branchNameLint"
+    }
+  }
+}
