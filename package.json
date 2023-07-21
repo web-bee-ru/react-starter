@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lamtev178/create-webbee-app.git"
+    "url": "https://github.com/web-bee-ru/react-starter.git"
   },
   "files": [
     "./dist/**"
